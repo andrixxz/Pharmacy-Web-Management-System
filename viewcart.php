@@ -31,12 +31,20 @@ if (isset($_POST["pname"]) && isset($_POST["price"])) {
     $pname = $_POST["pname"];
     $price = $_POST["price"];
 
-    // Insert product information along with user ID into the "cart" table
-    $sql = "INSERT INTO cart (user_id, cname, cprice) VALUES ('$user_id', '$pname', '$price')";
-    if (mysqli_query($conn, $sql)) {
-        echo "Product added to cart successfully";
+    // Check if the product already exists in the cart for the user
+    $check_sql = "SELECT * FROM cart WHERE user_id = '$user_id' AND cname = '$pname'";
+    $check_result = mysqli_query($conn, $check_sql);
+    if (mysqli_num_rows($check_result) > 0) {
+        // Product already exists in the cart, update the quantity
+        $existing_row = mysqli_fetch_assoc($check_result);
+        $quantity = $existing_row['cquantity'] + 1;
+        $update_sql = "UPDATE cart SET cquantity = '$quantity' WHERE user_id = '$user_id' AND cname = '$pname'";
+        mysqli_query($conn, $update_sql);
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        // Product does not exist in the cart, insert a new row
+        $quantity = 1; // Default quantity is 1
+        $insert_sql = "INSERT INTO cart (user_id, cname, cprice, cquantity) VALUES ('$user_id', '$pname', '$price', '$quantity')";
+        mysqli_query($conn, $insert_sql);
     }
 }
 
@@ -44,10 +52,22 @@ if (isset($_POST["pname"]) && isset($_POST["price"])) {
 if (isset($_POST["remove_item"])) {
     $cart_item_id = $_POST["cart_item_id"];
     
-    // Delete the item from the database
-    $sql_delete = "DELETE FROM cart WHERE id = '$cart_item_id'";
-    if (!mysqli_query($conn, $sql_delete)) {
-        echo "Error deleting record: " . mysqli_error($conn);
+    // Check the quantity of the item
+    $quantity_sql = "SELECT cquantity FROM cart WHERE id = '$cart_item_id'";
+    $quantity_result = mysqli_query($conn, $quantity_sql);
+    $row = mysqli_fetch_assoc($quantity_result);
+    $quantity = $row['cquantity'];
+    
+    // If quantity is greater than 1, decrement it
+    if ($quantity > 1) {
+        $update_sql = "UPDATE cart SET cquantity = cquantity - 1 WHERE id = '$cart_item_id'";
+        mysqli_query($conn, $update_sql);
+    } else {
+        // If quantity is 1, delete the item
+        $sql_delete = "DELETE FROM cart WHERE id = '$cart_item_id'";
+        if (!mysqli_query($conn, $sql_delete)) {
+            echo "Error deleting record: " . mysqli_error($conn);
+        }
     }
 }
 
@@ -86,6 +106,8 @@ $result = mysqli_query($conn, $sql);
                         <h3><?php echo $row["cname"]; ?></h3>
                         <!-- Display product price -->
                         <p>Price: $<?php echo $row["cprice"]; ?></p>
+                        <!-- Display product quantity -->
+                        <p>Quantity: <?php echo $row["cquantity"]; ?></p>
                         <!-- Form to remove item from cart -->
                         <form method="post" action="">
                             <input type="hidden" name="cart_item_id" value="<?php echo $row["id"]; ?>">
@@ -94,11 +116,17 @@ $result = mysqli_query($conn, $sql);
                     </div>
                 </div>
                 <?php
+                // Calculate total price
+                $total_price += $row["cprice"] * $row["cquantity"];
             }
         } else {
             echo "<p>Your cart is empty</p>";
         }
         ?>
+    </div>
+    <div class="cart-details">
+        <h3>Cart Details</h3>
+        <p>Total Price: $<?php echo $total_price; ?></p>
     </div>
 </div>
 </body>
