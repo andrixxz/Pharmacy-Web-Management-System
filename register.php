@@ -50,7 +50,7 @@ if (isset($_POST['register']))
     
     if ($email_check_query) { // if user exists
         
-        if ($user['email'] === $email) {
+        if ($user && $user['email'] === $email) {
         array_push($errors, "email already exists");
         }
     }
