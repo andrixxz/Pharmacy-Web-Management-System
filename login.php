@@ -1,4 +1,5 @@
 <?php
+// start the session
 session_start();
 
 // connect to the database
@@ -9,6 +10,7 @@ $databasename = "pharmacy";
 
 $conn = mysqli_connect($servername, $username, $password, $databasename);
 
+// check if the connection was successful
 if (mysqli_connect_errno()) {
     die("Connection error " . mysqli_connect_error());
 }
@@ -18,10 +20,13 @@ $email    = "";
 $password = "";
 $errors = array();
 
+// processing the login form submission
 if (isset($_POST['login'])) {
+    // gets email and password from the form
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+    // validating form fields
     if (empty($email)) {
         array_push($errors, "Email is required");
     }
@@ -29,15 +34,17 @@ if (isset($_POST['login'])) {
         array_push($errors, "Password is required");
     }
 
+    // if no errors, we attempt to log in
     if (count($errors) == 0) {
+        // selecting from database table
         $sql_query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
         $results = mysqli_query($conn, $sql_query);
         if (mysqli_num_rows($results) == 1) {
-            // Fetch user ID from the database
+            // fetches user ID from the database
             $user_row = mysqli_fetch_assoc($results);
             $user_id = $user_row['id'];
 
-            // Store user email and ID in the session
+            // store the user email and ID in the session
             $_SESSION['email'] = $email;
             $_SESSION['user_id'] = $user_id;
 
@@ -49,7 +56,6 @@ if (isset($_POST['login'])) {
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,10 +69,10 @@ if (isset($_POST['login'])) {
 <div class="banner">
     <img src="andreabanner2.png" alt="Pharmacy Banner">
 </div>
-
 <div class="login-container">
     <h2>Login</h2>
     <form action="login.php" method="post">
+        <!-- Include error messages -->
         <?php include('errors.php'); ?>
         <div class="form-group">
             <label for="email">Email:</label>
@@ -78,6 +84,7 @@ if (isset($_POST['login'])) {
         </div>
         <button name="login" type="submit">Login</button>
     </form>
+    <!-- Link to register page -->
     <p>Don't have an account? <a href="register.php">Register here</a></p>
 </div>
 </body>

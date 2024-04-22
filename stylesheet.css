@@ -14,14 +14,14 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Adjust the z-index as needed to ensure the banner appears above other content */
+    z-index: 1000; /* banner appears above other content */
     text-align: center;
-    background-color: white; /* Add this line to set the background color */
+    background-color: white; 
 }
 
 .banner img {
     width: 100%;
-    max-width: 1000px; /* Adjust the maximum width as needed */
+    max-width: 1000px; 
     height: auto;
 }
 
@@ -107,8 +107,7 @@ a:hover {
     padding-top: 20px; /* Add padding to the top to account for the fixed banner */
     margin-top: 900px;
     padding-right: 10px;
-    padding-left: 80px;
-    
+    padding-left: 80px; 
     
 }
 
@@ -228,4 +227,27 @@ a:hover {
 .cart-details p {
     background-color: white;
     
+}
+.congrats-message {
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%); /* to center horizontally */
+    text-align: center; 
+    margin-top: 10px; 
+    display: grid; 
+    padding: 20px; 
+    background-color: white; 
+    border: 10px solid #506b55; 
+    border-radius: 10px;
+    width: 70%; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    gap: 20px;
+    
+}
+
+.congrats-message h1,
+.congrats-message p {
+    margin: 0; 
+    text-align: left; 
 }

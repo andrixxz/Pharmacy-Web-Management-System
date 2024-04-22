@@ -1,16 +1,16 @@
 <?php
-// Start the session if it hasn't been started already
+// starts the session if it hasn't been started already
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-// Check if the user is logged in
+// checks if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    // Redirect to the login page if user is not logged in
+    // if not, redirecting to the login page 
     header("Location: login.php");
     exit;
 }
 
-// Connect to the database
+// connecting to the database
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -18,25 +18,29 @@ $databasename = "pharmacy";
 
 $conn = mysqli_connect($servername, $username, $password, $databasename);
 
+// checks if the connection was successful
 if (mysqli_connect_errno()) {
     die("Connection error " . mysqli_connect_error());
 }
-// Fetch user details from the database
+
+// fetches user details from the database
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT * FROM users WHERE id = $user_id";
+// stores result
 $result = $conn->query($sql);
 
+// if user found
 if ($result->num_rows > 0) {
-    // Assuming you have columns named 'firstName', 'lastName', and 'email' in your users table
+    // fetches first row from result and stores it in array
     $row = $result->fetch_assoc();
+    // extracts the value and assigns it to variable
     $user_name = $row["firstName"];
     $user_last_name = $row["lastName"];
     $user_email = $row["email"];
 } else {
     echo "User not found";
 }
-
-
+// close connection
 $conn->close();
 ?>
 
@@ -47,27 +51,26 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <style>
-        /* Add CSS styles here */
+        /* was having problems with xampp and the stylesheet wasnt working with this page*/
         body {
             font-family: Arial, sans-serif;
             background-color: #e2ece6;
             margin: 0;
             padding: 0;
         }
-
         .banner {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000; /* Adjust the z-index as needed to ensure the banner appears above other content */
+            z-index: 1000; /* banner appears above other content */
             text-align: center;
-            background-color: white; /* Add this line to set the background color */
+            background-color: white; 
         }
 
         .banner img {
             width: 100%;
-            max-width: 1000px; /* Adjust the maximum width as needed */
+            max-width: 1000px; 
             height: auto;
         }
 
@@ -102,19 +105,19 @@ $conn->close();
 
         .detail {
             margin-bottom: 20px;
-            padding: 10px; /* Add padding for the boxes */
-            border: 1px solid #ccc; /* Add border for the boxes */
-            border-radius: 5px; /* Add border radius for rounded corners */
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
         }
 
         .label {
             font-weight: bold;
-            white-space: nowrap; /* Prevent label from wrapping */
+            white-space: nowrap; /* prevents label from wrapping */
         }
 
         .value {
             margin-left: 10px;
-            white-space: nowrap; /* Prevent value from wrapping */
+            white-space: nowrap;
         }
 
         .edit-button {
@@ -146,7 +149,6 @@ $conn->close();
             background-color: #9ec0a1;
         }
     </style>
-
 </head>
 <body>
     <div class="banner">

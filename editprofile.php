@@ -1,16 +1,16 @@
 <?php
-// Start the session if it hasn't been started already
+// starts the session if it hasn't been started already
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-// Check if the user is logged in
+// checks if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    // Redirect to the login page if user is not logged in
+    // if not, redirecting to the login page 
     header("Location: login.php");
     exit;
 }
 
-// Connect to the database
+// connecting to the database
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -18,17 +18,20 @@ $databasename = "pharmacy";
 
 $conn = mysqli_connect($servername, $username, $password, $databasename);
 
+// checks if the connection was successful
 if (mysqli_connect_errno()) {
     die("Connection error " . mysqli_connect_error());
 }
-// Fetch user details from the database
+// fetches user details from the database
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT * FROM users WHERE id = $user_id";
 $result = $conn->query($sql);
 
+// if user found
 if ($result->num_rows > 0) {
-    // Assuming you have columns named 'firstName', 'lastName', and 'email' in your users table
+    // fetches first row from result and stores it in array
     $row = $result->fetch_assoc();
+    // extracts the value and assigns it to variable
     $user_name = $row["firstName"];
     $user_last_name = $row["lastName"];
     $user_email = $row["email"];
@@ -38,15 +41,15 @@ if ($result->num_rows > 0) {
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve edited details from the form
+    // retrieves the edited details from the form
     $new_user_name = $_POST["new_user_name"];
     $new_user_last_name = $_POST["new_user_last_name"];
     $new_user_email = $_POST["new_user_email"];
 
-    // Update user details in the database
+    // update the user details in the database
     $update_sql = "UPDATE users SET firstName = '$new_user_name', lastName = '$new_user_last_name', email = '$new_user_email' WHERE id = $user_id";
     if (mysqli_query($conn, $update_sql)) {
-        // Redirect to profile page or display success message
+        // redirect to profile page 
         header("Location: profile.php");
         exit;
     } else {
@@ -62,9 +65,9 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <title>User Edit Profile</title>
     <style>
-        /* Add CSS styles here */
+        //* was having problems with xampp and the stylesheet wasnt working with this page*/
         body {
             font-family: Arial, sans-serif;
             background-color: #e2ece6;
@@ -76,14 +79,14 @@ $conn->close();
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000; /* Adjust the z-index as needed to ensure the banner appears above other content */
+            z-index: 1000; /* banner appears above other content */
             text-align: center;
-            background-color: white; /* Add this line to set the background color */
+            background-color: white; 
         }
 
         .banner img {
             width: 100%;
-            max-width: 1000px; /* Adjust the maximum width as needed */
+            max-width: 1000px; 
             height: auto;
         }
 
@@ -109,7 +112,7 @@ $conn->close();
             color: #333333;
         }
         .detail {
-            margin-bottom: 30px; /* Increase margin-bottom for more space between lines */
+            margin-bottom: 30px; 
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -118,8 +121,8 @@ $conn->close();
         .label {
             font-weight: bold;
             flex: 1;
-            white-space: nowrap; /* Prevent label from wrapping */
-            margin-right: 10px; /* Add right margin for spacing */
+            white-space: nowrap; 
+            margin-right: 10px; 
         }
         form label {
             font-weight: bold;
@@ -128,12 +131,12 @@ $conn->close();
         .value {
             flex: 3;
             text-align: left;
-            white-space: nowrap; /* Prevent value from wrapping */
+            white-space: nowrap; 
         }
 
         input[type="text"],
         input[type="email"] {
-            width: 100%; /* Set input width to 100% */
+            width: 100%; 
             padding: 15px;
             border: 1px solid #ccc;
             border-radius: 3px;
@@ -141,29 +144,29 @@ $conn->close();
             
         }
         button {
-            width: 70%; /* Set button width to 100% */
+            width: 70%; 
             padding: 10px;
             border: none;
             border-radius: 3px;
-            background-color: #6aa06f; /* Button background color */
-            color: #fff; /* Button text color */
+            background-color: #6aa06f; 
+            color: #fff; 
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #9ec0a1; /* Button hover background color */
+            background-color: #9ec0a1; 
         }
 
         .cancel-button {
             display: inline-block;
             width: auto;
             padding: 10px 20px;
-            background-color: #6aa06f;;
+            background-color: #6aa06f;
             color: #fff;
             text-decoration: none;
             border-radius: 3px;
-            margin-top: 10px; /* Adjust margin-top as needed for spacing */
+            margin-top: 10px; 
             font-size: 14px;
             
         }
@@ -206,7 +209,7 @@ $conn->close();
                     <br>
                     <br>
                     <input type="text" id="new_user_name" name="new_user_name" value="<?php echo $user_name; ?>">
-                    <br> <!-- Add line break -->
+                    <br> 
                     <br>
                 </div>
                 <div class="form-group">
@@ -215,14 +218,14 @@ $conn->close();
                     <br>
                     <input type="text" id="new_user_last_name" name="new_user_last_name" value="<?php echo $user_last_name; ?>">
                     <br>
-                    <br><!-- Add line break -->
+                    <br>
                 </div>
                 <div class="form-group">
                     <label for="new_user_email">Email:</label>
                     <br>
                     <br>
                     <input type="email" id="new_user_email" name="new_user_email" value="<?php echo $user_email; ?>">
-                    <br> <!-- Add line break -->
+                    <br> 
                     <br>
                 </div>
                 <br>
