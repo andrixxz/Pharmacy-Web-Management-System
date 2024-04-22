@@ -82,17 +82,18 @@ $result = mysqli_query($conn, $sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Cart</title>
-    <link rel="stylesheet" href="viewcartstyle.css">
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
 <div class="banner">
     <img src="andreabanner2.png" alt="Pharmacy Banner" class="banner-image">
-    <div class="view-cart">
-        <a href="index.html">Go back to Products</a>
-    </div>
+    <div class="navlinks">
+            <a href="index.html" class="back-to-products-link">Go back to Products</a>
+        </div>
 </div>
+
 <div class="container">
-    <h2>Shopping Cart</h2>
+<h2>🛒 Shopping Cart</h2>
     <div class="cart-items">
         <?php
         $total_price = 0;
@@ -105,7 +106,7 @@ $result = mysqli_query($conn, $sql);
                         <!-- Display product name -->
                         <h3><?php echo $row["cname"]; ?></h3>
                         <!-- Display product price -->
-                        <p>Price: $<?php echo $row["cprice"]; ?></p>
+                        <p>Price: €<?php echo $row["cprice"]; ?></p>
                         <!-- Display product quantity -->
                         <p>Quantity: <?php echo $row["cquantity"]; ?></p>
                         <!-- Form to remove item from cart -->
@@ -124,10 +125,12 @@ $result = mysqli_query($conn, $sql);
         }
         ?>
     </div>
+    <div class="cart-details-container">
     <div class="cart-details">
-        <h3>Cart Details</h3>
-        <p>Total Price: $<?php echo $total_price; ?></p>
+        <h3>Cart Details:</h3>
+        <p>Total Price: €<?php echo $total_price; ?></p>
     </div>
+</div>
 </div>
 </body>
 </html>
