@@ -33,9 +33,16 @@ if (isset($_POST['login'])) {
         $sql_query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
         $results = mysqli_query($conn, $sql_query);
         if (mysqli_num_rows($results) == 1) {
+            // Fetch user ID from the database
+            $user_row = mysqli_fetch_assoc($results);
+            $user_id = $user_row['id'];
+
+            // Store user email and ID in the session
             $_SESSION['email'] = $email;
+            $_SESSION['user_id'] = $user_id;
+
             $_SESSION['success'] = "You are now logged in";
-            header('location: index.php');
+            header('location: index.html');
         } else {
             array_push($errors, "Wrong email/password combination");
         }

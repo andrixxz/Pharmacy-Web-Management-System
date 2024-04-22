@@ -62,10 +62,9 @@ if (isset($_POST['register']))
                       VALUES ('$firstName', '$lastName', '$email', '$password','$password2')";
         mysqli_query($conn, $sql_query);
         $_SESSION['success'] = "Data inserted successfully";
-        header('location: index.php');
+        header('location: index.html');
     }
 }
-
 
 ?>
 

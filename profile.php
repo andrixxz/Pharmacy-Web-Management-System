@@ -36,6 +36,7 @@ if ($result->num_rows > 0) {
     echo "User not found";
 }
 
+
 $conn->close();
 ?>
 
@@ -49,19 +50,24 @@ $conn->close();
         /* Add CSS styles here */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #e2ece6;
             margin: 0;
             padding: 0;
         }
 
         .banner {
-            background-color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Adjust the z-index as needed to ensure the banner appears above other content */
             text-align: center;
-            padding: 20px;
+            background-color: white; /* Add this line to set the background color */
         }
 
         .banner img {
-            max-width: 100%;
+            width: 100%;
+            max-width: 1000px; /* Adjust the maximum width as needed */
             height: auto;
         }
 
@@ -78,9 +84,10 @@ $conn->close();
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 10px;
-            margin-bottom: 300px;
+            margin-top: 200px;
+            margin-bottom: 100px;
             text-align: center;
+            border: 7px solid #506b55;
         }
 
         .profile-container h1 {
@@ -95,51 +102,85 @@ $conn->close();
 
         .detail {
             margin-bottom: 20px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
+            padding: 10px; /* Add padding for the boxes */
+            border: 1px solid #ccc; /* Add border for the boxes */
+            border-radius: 5px; /* Add border radius for rounded corners */
         }
 
         .label {
             font-weight: bold;
-            flex: 1;
             white-space: nowrap; /* Prevent label from wrapping */
         }
 
         .value {
             margin-left: 10px;
-            flex: 3;
-            text-align: left;
             white-space: nowrap; /* Prevent value from wrapping */
+        }
+
+        .edit-button {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #6aa06f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .edit-button:hover {
+            background-color: #9ec0a1;
+        }
+        .back-to-products-link {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #6aa06f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .back-to-products-link:hover {
+            background-color: #9ec0a1;
         }
     </style>
 
 </head>
 <body>
     <div class="banner">
-        <img src="andreabanner2.png" alt="Pharmacy Banner" class="banner-image">
+        <img src="andreabanner2.png" alt="Pharmacy Banner">
         <div class="view-cart">
-            <a href="index.html">Go back to Products</a>
+            <a href="index.html" class="back-to-products-link">Go back to Products</a>
         </div>
     </div>
     <div class="main-container">
         <div class="profile-container">
             <h1>User Profile</h1>
             <div class="profile-info">
+                <span class="label">Name:</span>
+                <br>
+                <br>
                 <div class="detail">
-                    <span class="label">Name:</span>
                     <span class="value"><?php echo $user_name; ?></span>
                 </div>
+                <span class="label">Last Name:</span>
+                <br>
+                <br>
                 <div class="detail">
-                    <span class="label">Last Name:</span>
                     <span class="value"><?php echo $user_last_name; ?></span>
                 </div>
-                <div class="detail">
                     <span class="label">Email:</span>
+                    <br>
+                    <br>
+                <div class="detail">
                     <span class="value"><?php echo $user_email; ?></span>
                 </div>
             </div>
+            <a href="editprofile.php" class="edit-button">Edit Details</a>
         </div>
     </div>
 </body>
 </html>
+

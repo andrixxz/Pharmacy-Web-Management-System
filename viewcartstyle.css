@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    text-align: center;
+    background-color: white;
+}
+
+.banner img {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.cart-item {
+    border: 10px solid #506b55; /* Add border for visual separation */
+    padding: 20px; /* Add padding */
+    background-color: #ffffff; /* Set background color inside the border */
+    border-radius: 10px; /* Round the border */
+    margin-bottom: 20px; /* Add margin between items */
+}
+
+.cart-item h3,
+.cart-item p {
+    margin-top: 10px; /* Add spacing between elements */
+    margin-bottom: 10px; /* Add spacing between elements */
+}
+
+.cart-item button {
+    margin-top: 10px; /* Add spacing below the form */
+}
+
+.back-to-products-link {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #6aa06f;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+}
+
+.back-to-products-link:hover {
+    background-color: #9ec0a1;
+}
+
+
+.profile-link {
+    display: inline-block;
+    padding: 3px 7px;
+    background-color: #6aa06f;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+}
+
+.profile-link:hover {
+    background-color: #9ec0a1;
+}

@@ -131,6 +131,9 @@ $result = mysqli_query($conn, $sql);
         <p>Total Price: €<?php echo $total_price; ?></p>
     </div>
 </div>
+    <form action="congrats.php" method="post">
+            <button type="submit" name="pay">Pay</button>
+        </form>
 </div>
 </body>
 </html>

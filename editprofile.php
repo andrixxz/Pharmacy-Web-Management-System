@@ -67,7 +67,7 @@ $conn->close();
         /* Add CSS styles here */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #e2ece6;
             margin: 0;
             padding: 0;
         }
@@ -99,12 +99,14 @@ $conn->close();
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
-            margin-bottom: 150px;
+            margin-top: 170px;
+            margin-bottom: 200px;
             text-align: center;
+            border: 7px solid #506b55;
         }
         .profile-container h1 {
             margin-bottom: 30px;
+            color: #333333;
         }
         .detail {
             margin-bottom: 30px; /* Increase margin-bottom for more space between lines */
@@ -118,6 +120,9 @@ $conn->close();
             flex: 1;
             white-space: nowrap; /* Prevent label from wrapping */
             margin-right: 10px; /* Add right margin for spacing */
+        }
+        form label {
+            font-weight: bold;
         }
 
         .value {
@@ -133,6 +138,7 @@ $conn->close();
             border: 1px solid #ccc;
             border-radius: 3px;
             box-sizing: border-box;
+            
         }
         button {
             width: 70%; /* Set button width to 100% */
@@ -153,15 +159,32 @@ $conn->close();
             display: inline-block;
             width: auto;
             padding: 10px 20px;
-            background-color: rgb(188, 216, 189);
+            background-color: #6aa06f;;
             color: #fff;
             text-decoration: none;
             border-radius: 3px;
             margin-top: 10px; /* Adjust margin-top as needed for spacing */
+            font-size: 14px;
+            
         }
 
         .cancel-button:hover {
             background-color: #aaa;
+        }
+
+        .back-to-products-link {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #6aa06f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .back-to-products-link:hover {
+            background-color: #9ec0a1;
         }
 
     </style>
@@ -171,7 +194,7 @@ $conn->close();
     <div class="banner">
         <img src="andreabanner2.png" alt="Pharmacy Banner" class="banner-image">
         <div class="view-cart">
-            <a href="index.html">Go back to Products</a>
+            <a href="index.html" class="back-to-products-link">Go back to Products</a>
         </div>
     </div>
     <div class="main-container">
