@@ -177,3 +177,55 @@ a:hover {
     background-color: #9ec0a1;
 }
 
+.cart-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Display two items per row */
+    gap: 20px; /* Add gap between items */
+}
+
+.cart-item {
+    border: 10px solid #506b55; /* Add border for visual separation */
+    border-radius: 10px; /* Round the border */
+    padding: 20px; /* Add padding */
+    background-color: #ffffff; /* Set background color inside the border */
+    margin-top: 0; /* Add margin between items */
+    display: flex;
+    justify-content: space-between; 
+    text-align: center;
+    align-items: center; 
+}
+.item-details {
+    flex-grow: 1; /* Grow to fill the available space */
+}
+
+.remove-form {
+    margin-left: 20px; /* Add margin to separate the remove button from the text */
+}
+
+.container {
+    background-color: #e2ece6; /* Added background color to the container */
+}
+
+.container h2{
+    padding-top: 300px;
+    color: rgb(0, 0, 0);
+    margin-top: -50px;
+    margin-bottom: 45px;
+}
+
+.cart-details-container{
+    background-color: white;
+
+    margin-top: 20px;
+}
+.cart-details h3 {
+    background-color: white;
+    padding: 2px;
+    border-bottom: 1px solid #506b55
+
+}
+
+.cart-details p {
+    background-color: white;
+    
+}
