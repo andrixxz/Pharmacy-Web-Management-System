@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #e2ece6;
     margin: 0;
     padding: 0;
     display: flex;
@@ -95,3 +95,85 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    padding: 120px;
+    background-color: #2f556e;
+    justify-content: center;
+    padding-top: 20px; /* Add padding to the top to account for the fixed banner */
+    margin-top: 900px;
+    padding-right: 10px;
+    padding-left: 80px;
+    
+    
+}
+
+.product {
+    width: 70%; /* Set width for each product */
+    border: 10px solid #afceb4; /* Add border for visual separation */
+    padding: 20px; /* Add padding */
+    text-align: center; /* Center the content */
+    box-sizing: border-box; /* Include padding and border in the width */
+    background-color: #eef2ef; /* Set background color inside the border */
+    border-radius: 10px; /* Round the border */
+}
+
+.product-image {
+    width: 100%; /* Make the image fill its container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 200px; /* Limit the maximum height */
+}
+
+.add-to-cart {
+    margin-top: 10px; /* Add spacing below the image */
+}
+
+.back-to-products-link {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #6aa06f;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+}
+
+.back-to-products-link:hover {
+    background-color: #9ec0a1;
+}
+
+.view-cart-link {
+    display: inline-block;
+    padding: 3px 7px;
+    background-color: #6aa06f;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+}
+
+.view-cart-link:hover {
+    background-color: #9ec0a1;
+}
+
+.profile-link {
+    display: inline-block;
+    padding: 3px 7px;
+    background-color: #6aa06f;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+}
+
+.profile-link:hover {
+    background-color: #9ec0a1;
+}
+
