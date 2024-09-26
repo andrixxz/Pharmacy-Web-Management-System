@@ -10,7 +10,7 @@ This project is a dynamic web application for a pharmacy shop, developed using H
   - Users can view all available products, including details such as name, photo and price.
 - **Shopping Cart Functionality**: 
   - Users can add items to their cart, view the cart, and remove items as needed. The cart updates dynamically based on user actions.
-**Cart Persistence**:
+- **Cart Persistence**:
   - The shopping cart retains its contents even when the user logs out and logs back in, ensuring a seamless shopping experience.
 - **User Profile Management**: 
   - Users can edit their profile information, including name and email.
