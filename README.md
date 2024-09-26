@@ -6,7 +6,7 @@ This project is a dynamic web application for a pharmacy shop, developed using H
 ## Features
 - **User Authentication**: 
   - Users must log in to access the application. Registration is available for new users, and credentials are validated against the database.
-**Product Viewing**:
+- **Product Viewing**:
   - Users can view all available products, including details such as name, photo and price.
 - **Shopping Cart Functionality**: 
   - Users can add items to their cart, view the cart, and remove items as needed. The cart updates dynamically based on user actions.
